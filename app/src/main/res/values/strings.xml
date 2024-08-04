@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">College_Political_Parties</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="title_home">Gestionar Tipo de Documentos</string>
+    <string name="search">Buscar tipo de documento</string>
+    <string name="add_typeDoc">Agregar Tipo de Documento</string>
+    <string name="tv_name">Nombre</string>
+    <string name="tv_short_name">Nombre corto</string>
+    <string name="tv_state">Estado</string>
+    <string name="error_getting_data">Error al obtener los datos</string>
+
+    <!-- Activity RegisterUpdate -->
+    <string name="title_register">Registrar Tipo de Documento</string>
+    <string name="title_update">Actualizar Tipo de Documento</string>
+    <string name="txt_name">Nombre</string>
+    <string name="txt_name_short">Nombre Corto</string>
+    <string name="txt_ejm_name_short">Ejm. Dni</string>
+    <string name="save">Guardar</string>
+    <string name="update">Actualizar</string>
+    <string name="complete_all_fields">Complete todos los campos</string>
+    <string name="document_type_saved_successfully">Tipo de documento guardado exitosamente</string>
+    <string name="document_type_updated_successfully">Tipo de documento actualizado exitosamente</string>
+    <string name="error_saving">Error al guardar</string>
+    <string name="error_updating">Error al actualizar</string>
+    <string-array name="state_options">
+        <item>Activo</item>
+        <item>Inactivo</item>
+    </string-array>
+
+
+    <string name="disabled_typeDoc_title">Inhabilitar tipo de documento</string>
+    <string name="disabled_typeDoc_message">¿Quieres inhabilitar este tipo de documento?</string>
+    <string name="enabled_typeDoc_title">Habilitar tipo de documento</string>
+    <string name="enabled_typeDoc_message">¿Quieres habilitar este tipo de documento?</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="document_type_disabled_successfully">Tipo de documento inhabilitado exitosamente</string>
+    <string name="error_deleting_document_type">Error al inhabilitar el tipo de documento</string>
+</resources>
