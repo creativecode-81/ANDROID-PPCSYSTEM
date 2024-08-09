@@ -4,8 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     SearchView btnSearch;
     FloatingActionButton btnAdd;
+    Button btnViewStudent;
     RecyclerView recyclerView;
     TypeDocAdapter adapter;
     TypeDocService apiService;
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar vistas
         btnSearch = findViewById(R.id.btnSearch);
         btnAdd = findViewById(R.id.btnAdd);
+        btnViewStudent = findViewById(R.id.btnViewStudent);
         recyclerView = findViewById(R.id.recyclerViewTypeDocs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -67,25 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Cargar todos los documentos al inicio
         listTypeDocs();
-        /*Call<List<TipoDocumento>> call = apiService.listAll();
-
-        call.enqueue(new Callback<List<TipoDocumento>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<TipoDocumento>> call, @NonNull Response<List<TipoDocumento>> response) {
-                if (response.isSuccessful()) {
-                    List<TipoDocumento> typeDocs = response.body();
-                    adapter = new TypeDocAdapter(typeDocs);
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    showSnackBar(getString(R.string.error_getting_data));
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<TipoDocumento>> call, Throwable t) {
-                Log.e("MainActivity", "Error en la llamada: " + t.getMessage());
-            }
-        });*/
 
         // Configurar búsqueda
         btnSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -116,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Configurar el botón para ver los alumnos
+        btnViewStudent.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Student.class);
+            startActivity(intent);
+        });
+
         // Configurar el ClickListener para traer los datos
         adapter.setOnItemClickListener(position -> {
             TipoDocumento typeDoc = adapter.getItem(position);
@@ -142,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     adapter.updateData(response.body());
                 } else {
-                    showSnackBar(getString(R.string.error_getting_data));
+                    showSnackBar(getString(R.string.error_loading_document_types));
                 }
             }
 
@@ -174,14 +162,14 @@ public class MainActivity extends AppCompatActivity {
                     adapter = new TypeDocAdapter(typeDocs);
                     recyclerView.setAdapter(adapter);
                 } /*else {
-                    showSnackBar(getString(R.string.error_getting_data));
+                    showSnackBar(getString(R.string.error_loading_document_types));
                 }*/
             }
 
             @Override
             public void onFailure(@NonNull Call<List<TipoDocumento>> call, @NonNull Throwable t) {
                 Log.e("MainActivity", "Error en la llamada: " + t.getMessage());
-                showSnackBar(getString(R.string.error_getting_data));
+                showSnackBar(getString(R.string.error_loading_document_types));
             }
         });
     }
@@ -192,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         listTypeDocs();
     }
 
-    // Método para mostrar la alerta de eliminar la historia
+    // Método para mostrar la alerta de habilitar e inhabilitar el tipo de documento
     /*private void showDeleteDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.disabled_typeDoc_title))
@@ -213,8 +201,8 @@ public class MainActivity extends AppCompatActivity {
         if (typeDoc != null) {
             String title;
             String message;
-
-            if (typeDoc.getEstado().equals("1")) {
+            boolean isTypeDocEnabled = typeDoc.getEstado().equals("1");
+            if (isTypeDocEnabled) {
                 title = getString(R.string.disabled_typeDoc_title); // "Inhabilitar el tipo de documento"
                 message = getString(R.string.disabled_typeDoc_message); // "¿Quieres inhabilitar el tipo de documento?"
             } else {
@@ -227,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage(message)
                     .setCancelable(false)
                     .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                        disableTypeDoc(typeDoc.getId_tipodoc()); // Pasa el ID real del documento
+                        disableTypeDoc(typeDoc.getId_tipodoc(), isTypeDocEnabled); // Pasa el ID real del documento
                         dialog.dismiss();
                     })
                     .setNegativeButton(getString(R.string.no), (dialog, id) -> dialog.dismiss());
@@ -239,17 +227,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Método para eliminar un tipo de documento
-    private void disableTypeDoc(int id) {
+    private void disableTypeDoc(int id, boolean isTypeDocEnabled) {
         Call<TipoDocumento> call = apiService.disable(id);
         call.enqueue(new Callback<TipoDocumento>() {
             @Override
             public void onResponse(@NonNull Call<TipoDocumento> call, @NonNull Response<TipoDocumento> response) {
                 if (response.isSuccessful()) {
-                    showSnackBar(getString(R.string.document_type_disabled_successfully));
-                    //adapter.removeAt(id);
+                    String successMessage = getString(isTypeDocEnabled ? R.string.document_type_disabled_successfully : R.string.document_type_enabled_successfully);
+                    showSnackBar(successMessage);
                     listTypeDocs(); // Recargar la lista de documentos
                 } else {
-                    showSnackBar(getString(R.string.error_deleting_document_type));
+                    String error_message = getString(isTypeDocEnabled ? R.string.error_disabling_document_type : R.string.error_enabling_document_type);
+                    showSnackBar(error_message);
                 }
             }
 

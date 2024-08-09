@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.francode.college_political_parties.Utils.Apis;
 import com.francode.college_political_parties.Utils.TypeDocService;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -55,7 +57,7 @@ public class RegisterUpdate extends AppCompatActivity {
         tv_register_update = findViewById(R.id.tvRegisterUpdate);
         etName = findViewById(R.id.edtName);
         etNameShort = findViewById(R.id.edtNameShort);
-        spnState = findViewById(R.id.spnSate);
+        spnState = findViewById(R.id.spnState);
         btnSaveUpdate = findViewById(R.id.btnSaveUpdate);
 
         // Configurar Spinner
@@ -112,7 +114,7 @@ public class RegisterUpdate extends AppCompatActivity {
                     showSnackBar(getString(R.string.complete_all_fields));
                 }
             });
-            }
+        }
     }
 
     // Guardar Tipo de Documento
@@ -123,15 +125,10 @@ public class RegisterUpdate extends AppCompatActivity {
             public void onResponse(@NonNull Call<TipoDocumento> call, @NonNull Response<TipoDocumento> response) {
                 if (response.isSuccessful()) {
                     showSnackBar(getString(R.string.document_type_saved_successfully));
-                    // Retrasar la navegación
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        Intent intent = new Intent(RegisterUpdate.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }, 2000); // Retraso de 2 segundos
+                    navigateBackToMainActivity();
                 } else {
-                    showSnackBar(getString(R.string.error_saving));
+                    handleErrorResponse(response);
+                    //showSnackBar(getString(R.string.error_saving));
                 }
             }
 
@@ -150,23 +147,43 @@ public class RegisterUpdate extends AppCompatActivity {
             public void onResponse(@NonNull Call<TipoDocumento> call, @NonNull Response<TipoDocumento> response) {
                 if (response.isSuccessful()) {
                     showSnackBar(getString(R.string.document_type_updated_successfully));
-                    // Retrasar la navegación
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        Intent intent = new Intent(RegisterUpdate.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }, 2000); // Retraso de 2 segundos
+                    navigateBackToMainActivity();
                 } else {
-                    showSnackBar(getString(R.string.error_updating));
+                    //showSnackBar(getString(R.string.error_updating));
+                    handleErrorResponse(response);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TipoDocumento> call, @NonNull Throwable t) {
-                showSnackBar("Error: " + t.getMessage());
+                showSnackBar("Error al actualizar: " + t.getMessage());
             }
         });
+    }
+
+    // Manejo de errores en la respuesta del servidor
+    private void handleErrorResponse(Response<TipoDocumento> response) {
+        if (response.code() == 400) {
+            try {
+                String errorMessage = Objects.requireNonNull(response.errorBody()).string();
+                showSnackBar(errorMessage);
+            } catch (IOException e) {
+                Log.e("API_ERROR", "Error processing error body", e);
+                showSnackBar(getString(R.string.error_saving));
+            }
+        } else {
+            showSnackBar(getString(R.string.error_saving));
+        }
+    }
+
+    // Navegar de vuelta a la actividad principal después de guardar/actualizar
+    private void navigateBackToMainActivity() {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(RegisterUpdate.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }, 2000); // Retraso de 2 segundos
     }
 
     // Mensaje de alerta

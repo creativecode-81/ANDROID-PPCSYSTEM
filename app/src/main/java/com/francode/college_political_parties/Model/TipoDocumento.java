@@ -1,5 +1,7 @@
 package com.francode.college_political_parties.Model;
 
+import androidx.annotation.NonNull;
+
 public class TipoDocumento {
     private int id_tipodoc;
     private String nombre;
@@ -42,5 +44,11 @@ public class TipoDocumento {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nombre_corto; // Lo que se mostrará en el Spinner
     }
 }

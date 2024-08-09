@@ -4,10 +4,11 @@
     <string name="title_home">Gestionar Tipo de Documentos</string>
     <string name="search">Buscar tipo de documento</string>
     <string name="add_typeDoc">Agregar Tipo de Documento</string>
+    <string name="view_student">Ver Alumnos</string>
     <string name="tv_name">Nombre</string>
     <string name="tv_short_name">Nombre corto</string>
     <string name="tv_state">Estado</string>
-    <string name="error_getting_data">Error al obtener los datos</string>
+    <string name="error_loading_document_types">Error al cargar los tipos de documentos</string>
 
     <!-- Activity RegisterUpdate -->
     <string name="title_register">Registrar Tipo de Documento</string>
@@ -20,8 +21,8 @@
     <string name="complete_all_fields">Complete todos los campos</string>
     <string name="document_type_saved_successfully">Tipo de documento guardado exitosamente</string>
     <string name="document_type_updated_successfully">Tipo de documento actualizado exitosamente</string>
-    <string name="error_saving">Error al guardar</string>
-    <string name="error_updating">Error al actualizar</string>
+    <string name="error_saving">Error al guardar el tipo de documento</string>
+    <string name="error_updating">Error al actualizar el tipo de documento</string>
     <string-array name="state_options">
         <item>Activo</item>
         <item>Inactivo</item>
@@ -35,5 +36,53 @@
     <string name="yes">SI</string>
     <string name="no">NO</string>
     <string name="document_type_disabled_successfully">Tipo de documento inhabilitado exitosamente</string>
-    <string name="error_deleting_document_type">Error al inhabilitar el tipo de documento</string>
+    <string name="error_disabling_document_type">Error al inhabilitar el tipo de documento</string>
+    <string name="document_type_enabled_successfully">Tipo de documento habilitado exitosamente</string>
+    <string name="error_enabling_document_type">Error al habilitar el tipo de documento</string>
+
+
+    <!-- Activity Student -->
+    <string name="title_student">Gestionar Alumnos</string>
+    <string name="search_students">Buscar alumnos</string>
+    <string name="add_student">Agregar Tipo de Documento</string>
+    <string name="tv_names">Nombres</string>
+    <string name="tv_surnames">Apeliidos</string>
+    <string name="tv_type_doc">Doc.</string>
+    <string name="tv_nro_doc">Nro. Doc.</string>
+    <string name="tv_phone">Teléfono</string>
+    <string name="error_loading_students">Error al cargar los alumnos</string>
+    <string name="no_students_found">No se encontraron alumnos</string>
+    <string name="disabled_student_title">Inhabilitar alumno</string>
+    <string name="disabled_student_message">¿Quieres inhabilitar este alumno?</string>
+    <string name="enabled_student_title">Habilitar alumno</string>
+    <string name="enabled_student_message">¿Quieres habilitar este alumno?</string>
+    <string name="student_enabled_successfully">Alumno habilitado exitosamente</string>
+    <string name="error_enabling_student">Error al habilitar el alumno</string>
+    <string name="student_disabled_successfully">Alumno inhabilitado exitosamente</string>
+    <string name="error_disabling_student">Error al inhabilitar el alumno</string>
+
+    <!-- Activity RegisterUpdateStudent -->
+    <string name="title_register_student">Registrar Alumno</string>
+    <string name="title_update_student">Actualizar Alumno</string>
+    <string name="txt_names">Nombres</string>
+    <string name="txt_paternal_surname">Apellido Paterno</string>
+    <string name="txt_maternal_surname">Apellido Materno</string>
+    <string name="txt_type_doc">Documento</string>
+    <string name="txt_nro_doc">Nro. Doc</string>
+    <string name="txt_phone">Telefono</string>
+    <string name="error_name">Ingrese su nombre</string>
+    <string name="error_paternal_surname">Ingrese su apellido paterno</string>
+    <string name="error_maternal_surname">Ingrese su apellido materno</string>
+    <string name="error_doc_number">Ingrese su número de documento</string>
+    <string name="invalid_doc_number">Número de documento inválido</string>
+    <string name="error_doc_number_format">El número de documento debe contener únicamente 8 u 11 dígitos numéricos.</string>
+    <string name="error_phone_number">Ingrese su número de teléfono</string>
+    <string name="invalid_phone_number">Número de teléfono inválido</string>
+    <string name="error_phone_number_format">El número de teléfono  debe contener únicamente 9 u 13 dígitos numéricos.</string>
+
+    <string name="student_saved_successfully">Alumno guardado exitosamente</string>
+    <string name="student_updated_successfully">Alumno actualizado exitosamente</string>
+    <string name="error_saving_student">Error al guardar el alumno</string>
+    <string name="error_updating_student">Error al actualizar el alumno</string>
+
 </resources>

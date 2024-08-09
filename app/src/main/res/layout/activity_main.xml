@@ -52,6 +52,14 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <Button
+        android:id="@+id/btnViewStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_student"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/skye"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -65,7 +73,7 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -78,7 +86,7 @@
             android:stretchColumns="1"
             tools:ignore="UselessParent">
 
-            <!-- Encabezado de la tabla -->
+            <!- Encabezado de la tabla
             <TableRow
                 android:background="@color/skye">
 
@@ -108,9 +116,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/black"/> <!-- Línea horizontal -->
+                android:background="@android:color/black"/> <!- Línea horizontal
 
-            <!-- Fila de datos -->
+            <!- Fila de datos
             <TableRow>
                 <TextView
                     android:layout_width="0dp"
@@ -134,7 +142,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/black"/> <!-- Línea horizontal -->
+                android:background="@android:color/black"/> <!- Línea horizontal
 
             <TableRow>
                 <TextView
@@ -157,10 +165,10 @@
 
             </TableRow>
 
-            <!-- Agrega más filas según sea necesario -->
+            <!Agrega más filas según sea necesario
 
         </TableLayout>
 
-    </LinearLayout>
+    </LinearLayout> -->
 
 </LinearLayout>

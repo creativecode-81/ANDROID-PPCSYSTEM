@@ -93,7 +93,7 @@
             app:helperTextTextColor="@color/grey">
 
             <Spinner
-                android:id="@+id/spnSate"
+                android:id="@+id/spnState"
                 android:layout_width="130dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"

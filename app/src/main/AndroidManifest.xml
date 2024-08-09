@@ -16,6 +16,12 @@
         android:theme="@style/Theme.College_Political_Parties"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterUpdateStudent"
+            android:exported="false" />
+        <activity
+            android:name=".Student"
+            android:exported="false" />
+        <activity
             android:name=".RegisterUpdate"
             android:exported="false" />
         <activity
